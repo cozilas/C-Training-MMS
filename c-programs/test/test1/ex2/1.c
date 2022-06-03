@@ -49,21 +49,30 @@ unsigned flipOddBits(uint64_t *mask)
     for (int i = 63; i >= 0; i-=2)
     {
           *mask ^= (1ull << i);
-          // if(*mask&(1ull<<i))printf("1");else printf("0");
     }
     printBits(*mask);
+}
 
+void printBits8Bit(uint16_t n)
+{
+    for (int i = 15; i >= 0; i--)
+    {
+        printf("%u", n & (1 << i) ? 1 : 0);
+    }
+    printf(" = %u",n);
+    printf("\n");
 }
 unsigned mirrorBIts(uint16_t *mask)
 {
-    uint16_t r = 0;
-    for (int i = 0; i < 16; ++i)
+    uint16_t p1,p2;
+ for (int i = 16; i >= 0; i--)
     {
-        int bit = *mask & 0x01;
-        r <<= 1;
-        r += bit;
-        *mask >>= 1;
+        p1 = *mask|(1<<i);
+    
     }
+
+    printBits8Bit(p1);
+    printBits8Bit(p2);
 }
 
 int main()
@@ -74,9 +83,9 @@ int main()
     uint8_t mask8 = 20;
 
     uint64_t mask64s = 1000ul;
-    uint64_t mask16s = 10ul;
-   // bitCount(mask64, mask32, mask16, mask8);
+    uint16_t mask16s = 835;
+    bitCount(mask64, mask32, mask16, mask8);
     flipOddBits(&mask64s);
-  //  mirrorBIts(&mask16s);
+    mirrorBIts(&mask16s);
     return 0;
 }
