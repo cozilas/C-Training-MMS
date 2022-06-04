@@ -9,7 +9,7 @@ printf("input mass:");
 scanf("%lf",&mass);
 
 BMI = mass/pow(height,2);
-    printf("BMI = %lf",BMI);   
+    printf("BMI = %.2lf",BMI);   
 
     return 0;
 }

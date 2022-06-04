@@ -1,0 +1,7 @@
+sort -n numbers.txt > sorted.txt
+
+cat sorted.txt | head -1 > output.txt | cat sorted.txt | tail -1 >> output.txt
+
+
+
+
