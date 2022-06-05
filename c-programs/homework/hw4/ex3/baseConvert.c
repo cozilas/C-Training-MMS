@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int val(char c)
 {
@@ -65,19 +66,25 @@ char* fromDeci(char res[], int base, int inputNum)
  
     return res;
 }
+
 int main()
 {
 	char str[100] = "11A";
 	int base,baseTo,num;
-    printf("enter number (if there are letters in CAPS) :");
+    printf("enter number :");
     scanf("%s", str);
-    printf("enter number system of number :");
+
+    for(int i = 0;str[i] != '\0';i++){
+        str[i] =toupper(str[i]);
+    }
+
+     printf("enter number system of number :");
     scanf("%d",&base);
     printf("enter number system to convert to :");
     scanf("%d",&baseTo);
     num = toDeci(str,base);
         
     char s[100];
-    printf("%s -> %s",str,fromDeci(s, baseTo, num));
+    printf("%s -> %s\n",str,fromDeci(s, baseTo, num)); 
 	return 0;
 }
