@@ -1,106 +1,22 @@
 #include <stdio.h>
 #include <math.h>
 
-  unsigned int class = 0;
+unsigned int class = 0;
 
-// function to convert decimal to binary
-void decToBinary(int n)
+void changeStatus();
+void checkPresents();
+void checkApsences();
+void markAsApsent();
+void markAsPresent();
+void printBits(unsigned int n);
+
+int main()
 {
-    // array to store binary number
-    int binaryNum[32];
- 
-    // counter for binary array
-    int i = 0;
-    while (n > 0) {
- 
-        // storing remainder in binary array
-        binaryNum[i] = n % 2;
-        n = n / 2;
-        i++;
-    }
-    for(int j = 0;j< 32 - i;j++){
-        printf("0");
-    }
-    // printing binary array in reverse order
-    for (int j = i - 1; j >= 0; j--)
-        printf("%d",binaryNum[j]);
-        printf("\n");
-}
-
-void markAsPresent(){
-    int index;
- 
-
-  
-    printf("enter student to mark as present: ");//mark as present
-    scanf("%d", &index);
-
-    class |= 1 << index;
-    decToBinary(class);
-    
-
-}
-void markAsApsent(){
-
-    int index;
-
-    printf("enter student to mark as upsent: ");//mark as upsent
-    scanf("%d", &index);
-
-    class &= ~(1 << index);
-    decToBinary(class);
-    
-}
-
-void checkApsences(){
-int index = 0;
-
-    printf("-----absences: ");
-
-
-    for(int i = 31;i>=0;i--){
-    if(!(class & (1<<(i)))) printf("%d ",i);
-    }
- index = 0;
-
-    printf("\n-----presents: ");
-
-
-     for(int i = 31;i>=0;i--){
-    if(class & (1<<(i)) )printf("%d ",i);
-    }
-    printf("\n");
-
-
-}
-
-void checkPresents(){
-int index = 0;
-
-    printf("-----presents: ");
-
-
-     for(int i = 31;i>=0;i--){
-    if(class & (1<<(i)) )printf("%d ",i);
-    }
-    
-}
-
-void changeStatus(){
-    int index;
-
-    printf("status edit: ");//mark as present
-    scanf("%d", &index);
-
-    class ^= 1 << index;
-    decToBinary(class);
-    
-
-}
-int main(){
-
     unsigned int attendance = 0;
     int option;
+
+    unsigned int n = 14;
+
     while (1)
     {
         printf("1. Set attendance\n");
@@ -111,32 +27,105 @@ int main(){
         scanf("%d", &option);
         if (option == 1)
         {
-           markAsPresent();
+            markAsPresent();
         }
         else if (option == 2)
         {
-             markAsApsent();
+            markAsApsent();
         }
         else if (option == 3)
         {
-             checkApsences();
+            checkApsences();
         }
-               
-               else if (option == 4)
+
+        else if (option == 4)
         {
-              changeStatus();
-        }else if (option == 5){
+            changeStatus();
+        }
+        else if (option == 5)
+        {
             break;
         }
-
-        // to do
     }
-    return 0;
 
-    //markAsPresent();
-  //  markAsApsent();
-  //  checkApsences();
-  //  checkPresents();
-  //  changeStatus();
     return 0;
+}
+
+void printBits(unsigned int n)
+{
+    for (int i = 31; i >= 0; i--)
+    {
+        printf("%u", n & (1 << i) ? 1 : 0);
+    }
+    printf("\n");
+}
+
+void markAsPresent()
+{
+    int index;
+
+    printf("enter student to mark as present: ");
+    scanf("%d", &index);
+
+    class |= 1 << index;
+    printBits(class);
+}
+
+void markAsApsent()
+{
+
+    int index;
+
+    printf("enter student to mark as upsent: ");
+    scanf("%d", &index);
+
+    class &= ~(1 << index);
+    printBits(class);
+}
+
+void checkApsences()
+{
+    int index = 0;
+
+    printf("-----absences: ");
+
+    for (int i = 31; i >= 0; i--)
+    {
+        if (!(class & (1 << (i))))
+            printf("%d ", i);
+    }
+    index = 0;
+
+    printf("\n-----presents: ");
+
+    for (int i = 31; i >= 0; i--)
+    {
+        if (class & (1 << (i)))
+            printf("%d ", i);
+    }
+    printf("\n");
+}
+
+void checkPresents()
+{
+    int index = 0;
+
+    printf("-----presents: ");
+
+    for (int i = 31; i >= 0; i--)
+    {
+        if (class & (1 << (i)))
+            printf("%d ", i);
+    }
+}
+
+void changeStatus()
+{
+    int index;
+
+    printf("status edit: ");
+    scanf("%d", &index);
+
+    class ^= 1 << index;
+    printBits(class);
 }

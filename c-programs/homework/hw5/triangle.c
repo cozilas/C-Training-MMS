@@ -8,20 +8,23 @@ int main(){
 
 
 while(scanf("%lf %lf %lf",&a,&b,&c) != EOF){
-    if(a<0 || b<0 || c<0){
-        fprintf(stderr,"invalid triangle sides!\n",-1);
-        continue;
+    if(!triangle(a,b,c,&s,&p)){
+        printf("s = %.2lf\np = %.2lf\n",s,p);
+    }else{
+        fprintf(stderr,"invalid triangle sides!\n");
     }
-triangle(a,b,c,&s,&p);
-printf("s = %.2lf\np = %.2lf\n",s,p);
-
 
 }
     return 0;
 }
 
 int triangle(double a,double b,double c,double*s,double*p){
+    if(a<0 || b<0 || c<0){       
+        return -1;
+    }else{
     *p = a+b+c;
     *s = *p/2;
+    
     return 0;
+    }
 }
