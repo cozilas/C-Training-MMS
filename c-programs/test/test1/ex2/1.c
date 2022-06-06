@@ -49,8 +49,9 @@ unsigned flipOddBits(uint64_t *mask)
 
     for (int i = 63; i >= 0; i -= 2)
     {
-        *mask ^= 1 << i;
+        *mask = ~(1 << i);
     }
+    printBits(*mask);
 }
 unsigned mirrorBIts(uint16_t *mask)
 {
@@ -73,8 +74,8 @@ int main()
 
     uint64_t mask64s = 10ul;
     uint64_t mask16s = 10ul;
-    bitCount(mask64, mask32, mask16, mask8);
+   // bitCount(mask64, mask32, mask16, mask8);
     flipOddBits(&mask64s);
-    mirrorBIts(&mask16s);
+  //  mirrorBIts(&mask16s);
     return 0;
 }
