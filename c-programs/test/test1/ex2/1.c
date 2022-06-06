@@ -47,9 +47,9 @@ void bitCount(uint64_t mask64, uint32_t mask32, uint16_t mask16, uint8_t mask8)
 unsigned flipOddBits(uint64_t *mask)
 {
 
-    for (int i = 63; i >= 0; i -= 2)
+    for (int i = 63; i >= 0; i --)
     {
-        *mask = ~(1 << i);
+        *mask ^= 1 << i;
     }
     printBits(*mask);
 }
@@ -72,7 +72,7 @@ int main()
     uint16_t mask16 = 2005;
     uint8_t mask8 = 20;
 
-    uint64_t mask64s = 10ul;
+    uint64_t mask64s = 1000ul;
     uint64_t mask16s = 10ul;
    // bitCount(mask64, mask32, mask16, mask8);
     flipOddBits(&mask64s);
