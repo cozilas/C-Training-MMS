@@ -75,6 +75,6 @@ int main()
     uint64_t mask16s = 10ul;
     bitCount(mask64, mask32, mask16, mask8);
     flipOddBits(&mask64s);
-    mirrorBIts(mask16s);
+    mirrorBIts(&mask16s);
     return 0;
 }
