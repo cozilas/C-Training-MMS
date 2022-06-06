@@ -1,0 +1,17 @@
+ex1)
+ps aux | wc -l
+
+
+
+ex2)
+mkdir cPrograms
+find . -name \*.c -exec mv {} cPrograms \;
+
+ex3)
+chmod 765 testFile.c
+
+
+ex4)
+wc -l source2.c > lineCount
+wc -l source1.c >> lineCount
+
