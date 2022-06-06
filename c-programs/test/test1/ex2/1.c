@@ -47,11 +47,11 @@ void bitCount(uint64_t mask64, uint32_t mask32, uint16_t mask16, uint8_t mask8)
 unsigned flipOddBits(uint64_t *mask)
 {
 
-    for (int i = 63; i >= 0; i --)
+    for (int i = 63; i >= 0; i =-2)
     {
         *mask ^= 1 << i;
     }
-    printBits(*mask);
+   // printBits(*mask);
 }
 unsigned mirrorBIts(uint16_t *mask)
 {
