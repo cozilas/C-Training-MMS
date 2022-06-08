@@ -16,12 +16,14 @@ int main()
 
     uint64_t mask64s = 0ul;
     uint16_t mask16s = 3333;
-    printf("mirror bits =\n");
-    mirrorBIts(&mask16s);
-    printf("\ncount 1 bits =\n");
+
+
+
     bitCount(mask64, mask32, mask16, mask8);
-    printf("\nflip every second bit =\n");
+
     flipOddBits(&mask64s);
+
+    mirrorBIts(&mask16s);
     
     
     return 0;
@@ -93,7 +95,7 @@ void printBits16Bit(uint16_t n)
 
 unsigned mirrorBIts(uint16_t *mask)
 {
-    uint16_t p1;
+    uint16_t p1 = 0;
     printBits16Bit(*mask);
     
  for (int i = 15; i >= 0; i--)
