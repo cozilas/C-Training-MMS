@@ -1,5 +1,32 @@
 #include <stdio.h>
 #include <inttypes.h>
+
+void printBits(unsigned long long int n);
+void bitCount(uint64_t mask64, uint32_t mask32, uint16_t mask16, uint8_t mask8);
+unsigned flipOddBits(uint64_t *mask);
+void printBits16Bit(uint16_t n);
+unsigned mirrorBIts(uint16_t *mask);
+
+int main()
+{
+    uint64_t mask64 = 0ul;
+    uint32_t mask32 = 2005;
+    uint16_t mask16 = 2005;
+    uint8_t mask8 = 20;
+
+    uint64_t mask64s = 0ul;
+    uint16_t mask16s = 3333;
+    printf("mirror bits =\n");
+    mirrorBIts(&mask16s);
+    printf("\ncount 1 bits =\n");
+    bitCount(mask64, mask32, mask16, mask8);
+    printf("\nflip every second bit =\n");
+    flipOddBits(&mask64s);
+    
+    
+    return 0;
+}
+
 void printBits(unsigned long long int n)
 {
     for (int i = 63; i >= 0; i--)
@@ -9,6 +36,7 @@ void printBits(unsigned long long int n)
     }
     printf("\n");
 }
+
 void bitCount(uint64_t mask64, uint32_t mask32, uint16_t mask16, uint8_t mask8)
 {
     int counter = 0;
@@ -53,7 +81,7 @@ unsigned flipOddBits(uint64_t *mask)
     printBits(*mask);
 }
 
-void printBits8Bit(uint16_t n)
+void printBits16Bit(uint16_t n)
 {
     for (int i = 15; i >= 0; i--)
     {
@@ -62,30 +90,17 @@ void printBits8Bit(uint16_t n)
     printf(" = %u",n);
     printf("\n");
 }
+
 unsigned mirrorBIts(uint16_t *mask)
 {
-    uint16_t p1,p2;
- for (int i = 16; i >= 0; i--)
-    {
-        p1 = *mask|(1<<i);
+    uint16_t p1;
+    printBits16Bit(*mask);
     
+ for (int i = 15; i >= 0; i--)
+    {
+        if(*mask&(1<<i)){
+         p1 = p1 |(1<<(15-i));
+        }
     }
-
-    printBits8Bit(p1);
-    printBits8Bit(p2);
-}
-
-int main()
-{
-    uint64_t mask64 = 0ul;
-    uint32_t mask32 = 2005;
-    uint16_t mask16 = 2005;
-    uint8_t mask8 = 20;
-
-    uint64_t mask64s = 1000ul;
-    uint16_t mask16s = 835;
-    bitCount(mask64, mask32, mask16, mask8);
-    flipOddBits(&mask64s);
-    mirrorBIts(&mask16s);
-    return 0;
+    printBits16Bit(p1);
 }
