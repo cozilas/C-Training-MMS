@@ -36,10 +36,10 @@ int main()
     {
         firstName(books[i].title);
         firstAndSecond(books[i].author);
-        books[i].pageNum = randint(5, 2000);
+        books[i].pageNum = randint(5, 2000); 
         books[i].price = randReal(5.0, 1000.0);
 
-        printf("%20s %30s %5d %7.2lf\n", books[i].title, books[i].author, books[i].pageNum, books[i].price);
+        printf("%20s %30s %5d %7.2lf\n", books[i].title, books[i].author, books[i].pageNum, books[i].price); 
     }
     printf("\n");
     qsort(books, COUNT, sizeof(*books), compTitle);
@@ -52,9 +52,11 @@ int main()
     {
         printf("%20s %30s %5d %7.2lf\n", books[i].author, books[i].title, books[i].pageNum, books[i].price);
     }
-    binarySearch(books, COUNT, 5);
+    book key ={.title = "lsl lslsl",.author = "vazonv",.price = 20.50,.pageNum = 5,}
+    
+    book *element =  bsearch(&key,books,COUNT,sizeof(*books),compPrice);+
 
-
+  //  binarySearch(books, COUNT, 5);
 }
 int binarySearch(book *arr, int size, int key)
 {
