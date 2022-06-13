@@ -1,0 +1,4 @@
+to compile the program type :
+gcc -Wall main.c car.h car.c -o carp
+
+then ./carp to execute
