@@ -1,4 +1,0 @@
-Statically linked libraries are linked in at compile time. 
-Dynamically linked libraries are loaded at run time. Static linking bakes the l
-ibrary bit into your executable. Dynamic linking only bakes in a reference to the library.
-the bits for the dynamic library exist elsewhere and could be swapped out later.

@@ -10,7 +10,7 @@
 #define COUNT 10
 
 typedef int (*comparef_t)(const void *, const void *);
-typedef int (*getComparator(int n))(const void *, const void *);
+int (*getComparator(int n))(const void *, const void *);
 
 
 typedef struct Car
@@ -31,5 +31,6 @@ double randReal(double min, double max);
 char *randomName(char *name);
 void printCar(const Car *);
 void printCars(const Car *books);
+comparef_t getfun(const int);
 
 #endif

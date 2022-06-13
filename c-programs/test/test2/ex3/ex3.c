@@ -2,10 +2,9 @@
 #include <string.h>
 
 int main(){
-    char str[500];
+    char str[501];
 
     scanf("%s",str);
-  // printf("%s",str);
 
     for(int i = 0;i<strlen(str);i++){
         if(i%2 == 0){
