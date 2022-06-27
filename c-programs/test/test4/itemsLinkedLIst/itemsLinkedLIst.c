@@ -10,7 +10,7 @@
 typedef struct item_t
 {
     uint16_t itemId;
-    char discription[256];
+    char discription[251];
     double weight;
     double price;
 } item_t;
@@ -20,6 +20,36 @@ typedef struct node_t
     item_t item;
     struct node_t *next;
 } node_t;
+
+int randInt(int, int);
+double randReal(double, double);
+void generateSentence(char *);
+void push(node_t **, item_t);
+void print_list(node_t *);
+double totalItemsWeight(node_t *);
+node_t *minPriceItem(node_t *);
+int main()
+{
+    srand(time(NULL));
+    uint16_t itemIds = 0;
+    item_t item;
+    node_t *ll;
+    ll = NULL;
+    for (int i = 0; i < COUNT; i++)
+    {
+        generateSentence(item.discription);
+        item.itemId = itemIds++;
+        item.weight = randReal(0.100, 100.00);
+        item.price = randReal(1.00, 1500.00);
+        push(&ll, item);
+    }
+    print_list(ll);
+    printf("                                                                                                         -------------------\n");
+    printf("                                                                                                         weight sum = %.2lf\n", totalItemsWeight(ll));
+    printf("                                                                                                     cheapest price = %.2lf\n", minPriceItem(ll)->item.price);
+
+    return 0;
+}
 
 int randInt(int min, int max)
 {
@@ -65,7 +95,14 @@ void print_list(node_t *list)
     {
         return;
     }
+    printf("%99s ", "Description");
+    printf("%6s ", " number");
+    printf("%8s ", " weight");
+    printf("%8s ", " price");
+
+    putchar('\n');
     node_t *current = list;
+
     while (current)
     {
         printf("%100s ", current->item.discription);
@@ -102,7 +139,6 @@ node_t *minPriceItem(node_t *list)
 
     while (current)
     {
-        //printf("%lf %lf \n",current->item.price,cheapestNode->item.price);
         if (current->item.price < cheapestNode->item.price)
         {
             cheapestNode = current;
@@ -110,36 +146,4 @@ node_t *minPriceItem(node_t *list)
         current = current->next;
     }
     return cheapestNode;
-}
-int main()
-{
-    srand(time(NULL));
-    uint16_t itemIds = 0;
-    item_t items[COUNT];
-    for (int i = 0; i < COUNT; i++)
-    {
-        generateSentence(items[i].discription);
-        items[i].itemId = itemIds++;
-        items[i].weight = randReal(0.100, 100.00);
-        items[i].price = randReal(1.00, 1500.00);
-    }
-    node_t *ll;
-    ll = NULL;
-
-    push(&ll, items[0]);
-    push(&ll, items[1]);
-    push(&ll, items[2]);
-    push(&ll, items[3]);
-    push(&ll, items[4]);
-    push(&ll, items[5]);
-    push(&ll, items[6]);
-    push(&ll, items[7]);
-    push(&ll, items[8]);
-    push(&ll, items[9]);
-
-    print_list(ll);
-    printf("weight sum = %.2lf\n", totalItemsWeight(ll));
-    printf("cheapest price = %lf\n", minPriceItem(ll)->item.price);
-
-    return 0;
 }

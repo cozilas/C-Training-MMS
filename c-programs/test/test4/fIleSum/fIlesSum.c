@@ -6,36 +6,8 @@
 #include <time.h>
 #include <string.h>
 
-void binaryFileMaker(const char *name)
-{
-    FILE *fw = fopen(name, "wb");
-    int num;
-    for (int i = 0; i < 4; i++)
-    {
-        num = 0 + rand() % 20;
-        fwrite(&num, sizeof(num), 1, fw);
-    }
-    fclose(fw);
-}
-int binaryFileSum(char *source)
-{
-
-    FILE *fr = fopen(source, "rb");
-    if (fr == NULL)
-    {
-        fprintf(stderr, "%s-cant be found!\n", source);
-        return 0;
-    }
-    int num;
-    int sum = 0;
-    while (fread(&num, sizeof(num), 1, fr))
-    {
-        sum += num;
-    }
-    printf("%s sum = %d\n", source, sum);
-    fclose(fr);
-    return sum;
-}
+int fileSum(char *source);
+int getSumDigits(int n);
 int main(int argc, char *argv[])
 {
     fflush(stdout);
@@ -53,25 +25,24 @@ int sumAll = 0;
         pid_t pid = fork();
 
         if (pid == 0)
-        {
+        {  // int sumPrev;
+            //read(fd2[0],&sumPrev
             close(fd[0]);
             int sump=0;
-            sump = binaryFileSum(argv[i]);
+            sump = fileSum(argv[i]);
             write(fd[1],&sump,sizeof(sump));
             close(fd[1]);
 
-            // printf("%d\n",sump);
             return EXIT_SUCCESS;
         }else{
             close(fd[1]);
             int sum=0;
             read(fd[0],&sum,sizeof(int));
-            printf("%d\n",sum);
             close(fd[0]);
             sumAll += sum;
         }
     }
-    printf("%d\n", sumAll);
+   // printf("sum%d\n", sumAll);
     for (int i = 0; i < argc - 1; i++)
     {
         wait(NULL);
@@ -79,12 +50,77 @@ int sumAll = 0;
 
     return EXIT_SUCCESS;
 }
-/* int main(int argc, char **argv)
+
+int getSumDigits(int n){
+    int s = 0;
+    while(n!=0){
+        s = s +n%10;
+        n = n/10;
+    }
+    return s;
+}
+int fileSum(char *source)
 {
-    binaryFileMaker("dfg");
-    binaryFileMaker("dfg2");
-    binaryFileMaker("dfg3");
 
-    binaryFileSum(argv[1]);
+    FILE *fr = fopen(source, "r");
+    if (fr == NULL)
+    {
+        fprintf(stderr, "%s-cant be found or you dont have permissions!\n", source);
+        return 0;
+    }
+    int num;
+    int sum = 0;
+    int sumDigits;
+    while (fscanf(fr,"%d",&num)>0)
+    {
+        sumDigits = getSumDigits(num);
+        sum += sumDigits;
+    }
+    printf("%s sum = %d\n", source, sum);
+    fclose(fr);
+    return sum;
+}
 
-} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
